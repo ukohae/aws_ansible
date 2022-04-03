@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+  - name: get all instance info
+    ec2_instance_info:
+    register: result
+
+  - name: get output
+    debug:
+        msg: "{{ result.instances  | map(attribute='instance_id') }}"
